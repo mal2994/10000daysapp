@@ -4,130 +4,130 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <link rel="stylesheet" href="w3.css">
 <body class="w3-blue">
-
-<div class="w3-container w3-center w3-animate-opacity" style="max-width:600px;width:100%;margin-left:auto;margin-right:auto;">
-	<h1 style="text-shadow: 2px 2px 5px black;">10,000 Days Old Notification 🤩</h1>
-
-<!-- basic page -->
-	<div class="w3-panel w3-card-4 w3-white">
-<!-- error -->
-		<div class="w3-panel w3-pale-red w3-border" style="display:none" id="basic_err">
-			<h3>Just a sec...</h3>
-			<p>Please enter a valid date of birth 😋</p>
-		</div>
-<!-- inputs -->
-		<p>Date of Birth
-			<input type="date" id="birthday" name="birthday"></p>
-		<p><button onclick="submit_date()" class="w3-button w3-black w3-round-xxlarge">Submit💥</button></p>
-		<p></p>
-	</div>
-</div>
-
-<!-- modal -->
-<div id="id01" class="w3-modal">
-		<div class="w3-modal-content w3-card-4">
-			<header class="w3-container w3-teal"> 
-				<span onclick="document.getElementById('id01').style.display='none'" 
-				class="w3-button w3-display-topright">&times;</span>
-				<h2>Here's your notif 💦</h2>
-			</header>
-<!-- error -->
-			<div class="w3-panel w3-pale-red w3-border" style="display:none" id="modal_err">
-				<h3>Oh, this won't work...</h3>
-				<p>Please check at least 1 checkbox! 😋</p>
-			</div>
-<!-- paragraph --> 
-			<div class="w3-container w3-white">
-				<p>Please find the button below. A click will deliver an iCalendar .ics file, acceptable by any device.</p>
-<!-- inputs --> 
-					<p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox10klabel"> 10,000 (09/22/2022)</label></p>
-					<p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox12klabel"> 12,345 (02/22/2029)</label></p>
-					<button class="w3-btn w3-teal" type="submit" onclick="submit_modal()">NOTIFY 🚀</button></p>
-			</div>
-		</div>
-	</div>
-
-<script>
-// function alias g:
-var g = document.getElementById.bind(document);
-var date10k;
-var date12k;
-
-/* basic page */
-function submit_date() {
-	if (birthday.value.length == 10) {
-		g('id01').style.display='block';
-		g('basic_err').style.display='none';
-		date10k = addDays(birthday.value, 10000+1).toLocaleDateString("en-US")
-		date12k = addDays(birthday.value, 12345+1).toLocaleDateString("en-US")
-		g('checkbox10klabel').innerHTML = " 10,000 (" + date10k + ")";
-		g('checkbox12klabel').innerHTML = " 12,345 (" + date12k + ")";
-	} else {
-		g('basic_err').style.display='block';
-	}
-}
-function addDays(date, days) {
-	var result = new Date(date);
-	result.setDate(result.getDate() + days);
-	return result;
-}
-
-/* modal */
-var modal = g('id01');
-window.onclick = function(event) {
-	if (event.target == modal) {
-		// When the user clicks anywhere outside of the modal, close it
-		modal.style.display = "none";
-	}
-}
-// create file:
-function submit_modal() {
-	const arr_cb = Array.from(document.getElementsByName("user-checkbox"));
-	// validation:
-	if (arr_cb.filter(el => { return el.checked }).length < 1) {
-		g('modal_err').style.display='block';
-		return;
-	} else {
-		g('modal_err').style.display='none';
-	}
-	// inputs are valid, now create the file:
-	const e0 = (arr_cb[0].checked == true ? createEventForICS(date10k, 10000) : "");
-	const e1 = (arr_cb[1].checked == true ? createEventForICS(date12k, 12345) : "");
-	var content = `BEGIN:VCALENDAR
-VERSION:2.0
-` + e0 + `
-` + e1 + `
-END:VCALENDAR`;
-	// redirect user to file:
-	const a = document.createElement("a");
-	a.href = window.URL.createObjectURL(new Blob([content],{type:"text/calendar"}));
-	a.download = "10000_days_notif.ics";
-	a.click();
-}
-function createEventForICS(d, n) {
-	if (d == "") { return "" }
-	return `BEGIN:VEVENT
-DTSTAMP:` + getDateStringForICS((new Date(d))) + `
-DTSTART:` + getDateStringForICS((new Date(d))) + `
-SUMMARY:Hey! You're ` + n + ` days old!
-BEGIN:VALARM
-TRIGGER:-PT1440M
-ACTION:DISPLAY
-DESCRIPTION:Reminder
-END:VALARM
-END:VEVENT`
-}
-function getDateStringForICS(d) {
-	const mm = d.getMonth() + 1; // getMonth() is zero-based
-	const dd = d.getDate();
-// on dates, 'Z' time zone was omitted so that user email app will use local zone ideally
-	return [d.getFullYear(),
-		(mm>9 ? '' : '0') + mm,
-		(dd>9 ? '' : '0') + dd,
-		'T080000'
-		].join('');
-}
-</script>
-
-</body>
-</html>
+  
+  <div class="w3-container w3-center w3-animate-opacity" style="max-width:600px;width:100%;margin-left:auto;margin-right:auto;">
+    <h1 style="text-shadow: 2px 2px 5px black;">10,000 Days Old Notification 🤩</h1>
+    
+    <!-- basic page -->
+    <div class="w3-panel w3-card-4 w3-white">
+      <!-- error -->
+      <div class="w3-panel w3-pale-red w3-border" style="display:none" id="basic_err">
+        <h3>Just a sec...</h3>
+        <p>Please enter a valid date of birth 😋</p>
+      </div>
+      <!-- inputs -->
+      <p>Date of Birth
+        <input type="date" id="birthday" name="birthday"></p>
+        <p><button onclick="submit_date()" class="w3-button w3-black w3-round-xxlarge">Submit💥</button></p>
+        <p></p>
+      </div>
+    </div>
+    
+    <!-- modal -->
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content w3-card-4">
+        <header class="w3-container w3-teal"> 
+          <span onclick="document.getElementById('id01').style.display='none'" 
+          class="w3-button w3-display-topright">&times;</span>
+          <h2>Here's your notif 💦</h2>
+        </header>
+        <!-- error -->
+        <div class="w3-panel w3-pale-red w3-border" style="display:none" id="modal_err">
+          <h3>Oh, this won't work...</h3>
+          <p>Please check at least 1 checkbox! 😋</p>
+        </div>
+        <!-- paragraph --> 
+        <div class="w3-container w3-white">
+          <p>Please find the button below. A click will deliver an iCalendar .ics file, acceptable by any device.</p>
+          <!-- inputs --> 
+          <p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox10klabel"> 10,000 (09/22/2022)</label></p>
+          <p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox12klabel"> 12,345 (02/22/2029)</label></p>
+          <button class="w3-btn w3-teal" type="submit" onclick="submit_modal()">NOTIFY 🚀</button></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      // function alias g:
+      var g = document.getElementById.bind(document);
+      var date10k;
+      var date12k;
+      
+      /* basic page */
+      function submit_date() {
+        if (birthday.value.length == 10) {
+          g('id01').style.display='block';
+          g('basic_err').style.display='none';
+          date10k = addDays(birthday.value, 10000+1).toLocaleDateString("en-US")
+          date12k = addDays(birthday.value, 12345+1).toLocaleDateString("en-US")
+          g('checkbox10klabel').innerHTML = " 10,000 (" + date10k + ")";
+          g('checkbox12klabel').innerHTML = " 12,345 (" + date12k + ")";
+        } else {
+          g('basic_err').style.display='block';
+        }
+      }
+      function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+      }
+      
+      /* modal */
+      var modal = g('id01');
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          // When the user clicks anywhere outside of the modal, close it
+          modal.style.display = "none";
+        }
+      }
+      // create file:
+      function submit_modal() {
+        const arr_cb = Array.from(document.getElementsByName("user-checkbox"));
+        // validation:
+        if (arr_cb.filter(el => { return el.checked }).length < 1) {
+          g('modal_err').style.display='block';
+          return;
+        } else {
+          g('modal_err').style.display='none';
+        }
+        // inputs are valid, now create the file:
+        const e0 = (arr_cb[0].checked == true ? createEventForICS(date10k, 10000) : "");
+        const e1 = (arr_cb[1].checked == true ? createEventForICS(date12k, 12345) : "");
+        var content = `BEGIN:VCALENDAR
+        VERSION:2.0
+        ` + e0 + `
+        ` + e1 + `
+        END:VCALENDAR`;
+        // redirect user to file:
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(new Blob([content],{type:"text/calendar"}));
+        a.download = "10000_days_notif.ics";
+        a.click();
+      }
+      function createEventForICS(d, n) {
+        if (d == "") { return "" }
+        return `BEGIN:VEVENT
+        DTSTAMP:` + getDateStringForICS((new Date(d))) + `
+        DTSTART:` + getDateStringForICS((new Date(d))) + `
+        SUMMARY:Hey! You're ` + n + ` days old!
+        BEGIN:VALARM
+        TRIGGER:-PT1440M
+        ACTION:DISPLAY
+        DESCRIPTION:Reminder
+        END:VALARM
+        END:VEVENT`
+      }
+      function getDateStringForICS(d) {
+        const mm = d.getMonth() + 1; // getMonth() is zero-based
+        const dd = d.getDate();
+        // on dates, 'Z' time zone was omitted so that user email app will use local zone ideally
+        return [d.getFullYear(),
+        (mm>9 ? '' : '0') + mm,
+        (dd>9 ? '' : '0') + dd,
+        'T080000'
+        ].join('');
+      }
+    </script>
+    
+  </body>
+  </html>
+  
