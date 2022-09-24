@@ -8,14 +8,14 @@
   <div class="w3-container w3-center w3-animate-opacity" style="max-width:600px;width:100%;margin-left:auto;margin-right:auto;">
     <h1 style="text-shadow: 2px 2px 5px black;">10,000 Days Old Notification 🤩</h1>
     
-    <!-- basic page -->
+<!-- basic page -->
     <div class="w3-panel w3-card-4 w3-white">
-      <!-- error -->
+<!-- error -->
       <div class="w3-panel w3-pale-red w3-border" style="display:none" id="basic_err">
         <h3>Just a sec...</h3>
         <p>Please enter a valid date of birth 😋</p>
       </div>
-      <!-- inputs -->
+<!-- inputs -->
       <p>Date of Birth
         <input type="date" id="birthday" name="birthday"></p>
         <p><button onclick="submit_date()" class="w3-button w3-black w3-round-xxlarge">Submit💥</button></p>
@@ -23,7 +23,7 @@
       </div>
     </div>
     
-    <!-- modal -->
+<!-- modal -->
     <div id="id01" class="w3-modal">
       <div class="w3-modal-content w3-card-4">
         <header class="w3-container w3-teal"> 
@@ -31,15 +31,15 @@
           class="w3-button w3-display-topright">&times;</span>
           <h2>Here's your notif 💦</h2>
         </header>
-        <!-- error -->
+<!-- error -->
         <div class="w3-panel w3-pale-red w3-border" style="display:none" id="modal_err">
           <h3>Oh, this won't work...</h3>
           <p>Please check at least 1 checkbox! 😋</p>
         </div>
-        <!-- paragraph --> 
+<!-- paragraph --> 
         <div class="w3-container w3-white">
           <p>Please find the button below. A click will deliver an iCalendar .ics file, acceptable by any device.</p>
-          <!-- inputs --> 
+<!-- inputs --> 
           <p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox10klabel"> 10,000 (09/22/2022)</label></p>
           <p><input class="w3-check" type="checkbox" checked="checked" name="user-checkbox"><label id="checkbox12klabel"> 12,345 (02/22/2029)</label></p>
           <button class="w3-btn w3-teal" type="submit" onclick="submit_modal()">NOTIFY 🚀</button></p>
@@ -93,10 +93,10 @@
         const e0 = (arr_cb[0].checked == true ? createEventForICS(date10k, 10000) : "");
         const e1 = (arr_cb[1].checked == true ? createEventForICS(date12k, 12345) : "");
         var content = `BEGIN:VCALENDAR
-        VERSION:2.0
-        ` + e0 + `
-        ` + e1 + `
-        END:VCALENDAR`;
+VERSION:2.0
+` + e0 + `
+` + e1 + `
+END:VCALENDAR`;
         // redirect user to file:
         const a = document.createElement("a");
         a.href = window.URL.createObjectURL(new Blob([content],{type:"text/calendar"}));
@@ -106,15 +106,15 @@
       function createEventForICS(d, n) {
         if (d == "") { return "" }
         return `BEGIN:VEVENT
-        DTSTAMP:` + getDateStringForICS((new Date(d))) + `
-        DTSTART:` + getDateStringForICS((new Date(d))) + `
-        SUMMARY:Hey! You're ` + n + ` days old!
-        BEGIN:VALARM
-        TRIGGER:-PT1440M
-        ACTION:DISPLAY
-        DESCRIPTION:Reminder
-        END:VALARM
-        END:VEVENT`
+DTSTAMP:` + getDateStringForICS((new Date(d))) + `
+DTSTART:` + getDateStringForICS((new Date(d))) + `
+SUMMARY:Hey! You're ` + n + ` days old!
+BEGIN:VALARM
+TRIGGER:-PT1440M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT`
       }
       function getDateStringForICS(d) {
         const mm = d.getMonth() + 1; // getMonth() is zero-based
